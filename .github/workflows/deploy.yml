@@ -125,11 +125,20 @@ jobs:
 
       - name: Create EB application version
         run: |
-          aws elasticbeanstalk create-application-version \
+          # Skip if a version with this SHA already exists (e.g. from a prior failed run).
+          EXISTS=$(aws elasticbeanstalk describe-application-versions \
             --application-name "${{ secrets.EB_APP_NAME }}" \
-            --version-label "${{ github.sha }}" \
-            --source-bundle S3Bucket="${{ secrets.EB_BUNDLE_BUCKET }}",S3Key="${{ env.ZIP_NAME }}" \
-            --auto-create-application
+            --version-labels "${{ github.sha }}" \
+            --query 'length(ApplicationVersions)' --output text)
+          if [ "$EXISTS" = "0" ]; then
+            aws elasticbeanstalk create-application-version \
+              --application-name "${{ secrets.EB_APP_NAME }}" \
+              --version-label "${{ github.sha }}" \
+              --source-bundle S3Bucket="${{ secrets.EB_BUNDLE_BUCKET }}",S3Key="${{ env.ZIP_NAME }}" \
+              --auto-create-application
+          else
+            echo "Application version ${{ github.sha }} already exists; reusing it."
+          fi
 
       - name: Update EB environment
         run: |
