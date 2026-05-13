@@ -1,22 +1,48 @@
-# Files NOT to ship to Elastic Beanstalk (used by `eb deploy` and CodePipeline bundle).
+# Files NOT to ship to Elastic Beanstalk.
+# Only the Express backend needs to deploy here; the React frontend ships to S3.
+
+# Git + tooling
 .git/
 .gitignore
 .vscode/
 .claude/
+.github/
+
+# Environment files (real env vars come from Beanstalk Configuration)
 .env
 .env.*
 !.env.example
 
-# Local-only artefacts
+# Frontend source + build artefacts (deployed separately to S3).
+# Backend imports a few helpers from src/data + src/utils — keep those.
+src/App.jsx
+src/main.jsx
+src/assets/
+src/components/
+src/context/
+src/hooks/
+src/pages/
+src/styles/
+public/
+dist/
+index.html
+vite.config.js
+
+# Local data and scratch
 mongo-data/
 output/
 tmp/
 scripts/
 
-# Source maps and dev artefacts not needed at runtime
+# Docs and reports
+*.md
+!README.md
+
+# Node + log artefacts
+node_modules/
 *.log
 npm-debug.log*
 
-# Tests / docs
+# Tests
 **/__tests__/**
 **/*.test.js
