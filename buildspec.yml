@@ -34,6 +34,7 @@ artifacts:
   # Everything in this list ships to Elastic Beanstalk as the deployment bundle.
   files:
     - server/**/*
+    - src/**/*           # server runtime imports from src/data and src/utils
     - dist/**/*
     - node_modules/**/*
     - package.json
