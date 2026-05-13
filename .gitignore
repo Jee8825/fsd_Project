@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Local-only data
+mongo-data/
+output/
+tmp/
+
+# Claude / AI tool caches
+.claude/
+
+# Misc
+*.pid
+*.seed
+coverage/

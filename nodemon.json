@@ -1,0 +1,13 @@
+{
+  "watch": [
+    "server/src",
+    "src/data/mockData.js",
+    "src/utils/helpers.js",
+    ".env"
+  ],
+  "ignore": [
+    "dist",
+    "node_modules"
+  ],
+  "ext": "js,mjs,cjs,json"
+}

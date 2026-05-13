@@ -1,0 +1,48 @@
+version: 0.2
+
+# AWS CodeBuild build specification for the Saffron Table Node.js + React app.
+# CodePipeline pulls source from the repo, hands it to CodeBuild which runs
+# this file, and the produced artifact is deployed to Elastic Beanstalk.
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 20
+    commands:
+      - echo "Node `node -v`, npm `npm -v`"
+      - npm ci
+
+  pre_build:
+    commands:
+      - echo "Running checks..."
+      - node -e "console.log('Node OK')"
+
+  build:
+    commands:
+      - echo "Building React frontend with Vite..."
+      - npm run build
+      - echo "Frontend build complete. dist/ contents:"
+      - ls -la dist
+
+  post_build:
+    commands:
+      - echo "Pruning devDependencies for runtime image..."
+      - npm prune --omit=dev
+      - echo "Build finished on `date`"
+
+artifacts:
+  # Everything in this list ships to Elastic Beanstalk as the deployment bundle.
+  files:
+    - server/**/*
+    - dist/**/*
+    - node_modules/**/*
+    - package.json
+    - package-lock.json
+    - Procfile
+    - .ebextensions/**/*
+    - .platform/**/*
+  discard-paths: no
+
+cache:
+  paths:
+    - node_modules/**/*

@@ -1,0 +1,22 @@
+# Files NOT to ship to Elastic Beanstalk (used by `eb deploy` and CodePipeline bundle).
+.git/
+.gitignore
+.vscode/
+.claude/
+.env
+.env.*
+!.env.example
+
+# Local-only artefacts
+mongo-data/
+output/
+tmp/
+scripts/
+
+# Source maps and dev artefacts not needed at runtime
+*.log
+npm-debug.log*
+
+# Tests / docs
+**/__tests__/**
+**/*.test.js
