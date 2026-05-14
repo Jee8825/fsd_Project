@@ -2154,6 +2154,29 @@ small {
   }
 }
 
+.live-backend-card {
+  border-left: 4px solid var(--color-accent);
+}
+
+.live-backend-card h2 {
+  margin: 0.5rem 0;
+  font-size: 1.4rem;
+}
+
+.live-backend-card code {
+  background: var(--color-accent-soft);
+  padding: 0.1rem 0.4rem;
+  border-radius: 6px;
+  font-size: 0.9em;
+}
+
+.info-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+}
+
 .aws-badge {
   margin-left: 0.75rem;
   font-size: 0.7rem;
