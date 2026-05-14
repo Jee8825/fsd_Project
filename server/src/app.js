@@ -31,7 +31,11 @@ app.use(express.json({ limit: '5mb' }));
 app.use(morgan('dev'));
 
 app.get('/api/health', (_req, res) => {
-  res.json({ status: 'ok' });
+  res.json({
+    status: 'ok',
+    version: process.env.APP_VERSION || 'dev',
+    deployedAt: new Date().toISOString(),
+  });
 });
 
 app.use('/api/auth', authRoutes);
