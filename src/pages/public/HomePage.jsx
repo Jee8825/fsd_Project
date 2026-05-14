@@ -46,7 +46,7 @@ const HomePage = () => {
       <section className="hero-banner">
         <div className="container hero-banner__grid">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <p className="eyebrow">Premium recipe studio</p>
+            <p className="eyebrow">Premium recipe studio · Deployed via GitHub Actions</p>
             <h1>Recipes, stories, and planning tools for a beautifully run kitchen.</h1>
             <p>
               Saffron Table blends editorial-quality food inspiration with practical planning features for home cooks who
