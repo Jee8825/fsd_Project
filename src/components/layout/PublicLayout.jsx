@@ -66,7 +66,7 @@ const PublicLayout = () => {
             <span className="brand-mark__badge">S</span>
             <div>
               <strong>{settings.logoText}</strong>
-              <small>Recipe studio · live on AWS</small>
+              <small>Recipe studio & editorial kitchen</small>
             </div>
           </Link>
           <nav className={`site-nav ${menuOpen ? 'open' : ''}`}>
