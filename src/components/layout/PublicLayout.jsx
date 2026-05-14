@@ -68,12 +68,6 @@ const PublicLayout = () => {
               <strong>{settings.logoText}</strong>
               <small>Recipe studio · live on AWS</small>
             </div>
-            <span
-              className="chip chip--accent aws-badge"
-              title="Frontend on S3 + CloudFront · Backend on Elastic Beanstalk · MongoDB Atlas"
-            >
-              ☁ Deployed on AWS
-            </span>
           </Link>
           <nav className={`site-nav ${menuOpen ? 'open' : ''}`}>
             {navItems.map((item) => (
