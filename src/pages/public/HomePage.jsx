@@ -87,8 +87,8 @@ const HomePage = () => {
       </section>
 
       <section className="container section-grid three">
-        <StatCard label="Recipes in Atlas" value={recipes.length} meta="Live count from MongoDB Atlas" />
-        <StatCard label="Editorial stories" value={blogPosts.length} meta="Food journal pieces and kitchen guides" />
+        <StatCard label="Curated recipes" value={`${recipes.length}+`} meta="Across categories, cuisines, and diet styles" />
+        <StatCard label="Editorial stories" value={`${blogPosts.length}+`} meta="Food journal pieces and kitchen guides" />
         <StatCard label="Active planners" value="1.2k" meta="Home cooks saving plans and shopping lists weekly" />
       </section>
 
