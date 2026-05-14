@@ -5,48 +5,6 @@ import { useApp } from '../../context/AppContext';
 import { AuthorCard, BlogCard, CategoryCard, CollectionCard, RecipeCard, ReviewCard } from '../../components/shared/Cards';
 import { LoadingGrid, NewsletterCard, PageHero, SearchBar, SectionHeader, StatCard } from '../../components/common/UI';
 
-const LiveBackendCard = ({ recipeCount }) => {
-  const [state, setState] = useState({ status: 'checking', latency: null, when: null });
-
-  useEffect(() => {
-    const apiBase = import.meta.env.VITE_API_BASE_URL || '/api';
-    const start = performance.now();
-    fetch(`${apiBase}/health`)
-      .then((res) => res.json())
-      .then((data) => {
-        setState({
-          status: data?.status === 'ok' ? 'ok' : 'error',
-          latency: Math.round(performance.now() - start),
-          when: new Date().toLocaleTimeString(),
-        });
-      })
-      .catch(() => setState({ status: 'error', latency: null, when: new Date().toLocaleTimeString() }));
-  }, []);
-
-  const dotColor = state.status === 'ok' ? '#3e8756' : state.status === 'checking' ? '#f5c36b' : '#c14a3a';
-
-  return (
-    <article className="detail-card live-backend-card">
-      <p className="eyebrow">Live infrastructure</p>
-      <h2>
-        <span style={{ display: 'inline-block', width: 10, height: 10, borderRadius: '50%', background: dotColor, marginRight: 8 }} />
-        Backend is {state.status === 'checking' ? 'checking…' : state.status === 'ok' ? 'reachable' : 'unreachable'}
-      </h2>
-      <p>
-        This page just pinged <code>/api/health</code> through CloudFront → Elastic Beanstalk and got a reply
-        {state.latency != null ? <> in <strong>{state.latency} ms</strong></> : null}.
-        {state.when ? <> Last checked at {state.when}.</> : null}
-      </p>
-      <div className="info-pill-row">
-        <span className="info-pill"><span>Recipes in MongoDB Atlas</span><strong>{recipeCount}</strong></span>
-        <span className="info-pill"><span>Frontend</span><strong>S3 + CloudFront</strong></span>
-        <span className="info-pill"><span>Backend</span><strong>Elastic Beanstalk</strong></span>
-        <span className="info-pill"><span>Database</span><strong>MongoDB Atlas</strong></span>
-      </div>
-    </article>
-  );
-};
-
 const HomePage = () => {
   const { settings, recipes, categories, blogPosts, authors, collections, reviews, users, testimonials, recentlyViewed } = useApp();
   const [query, setQuery] = useState('');
@@ -132,10 +90,6 @@ const HomePage = () => {
         <StatCard label="Recipes in Atlas" value={recipes.length} meta="Live count from MongoDB Atlas" />
         <StatCard label="Editorial stories" value={blogPosts.length} meta="Food journal pieces and kitchen guides" />
         <StatCard label="Active planners" value="1.2k" meta="Home cooks saving plans and shopping lists weekly" />
-      </section>
-
-      <section className="container">
-        <LiveBackendCard recipeCount={recipes.length} />
       </section>
 
       <section className="container section-space">
